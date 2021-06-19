@@ -1,33 +1,37 @@
-## Örnek Kod
+## Nedir bu Richard.db ?
+Json tabanlı çalışan bir veritabanıdır, sadeliği ve türkçe komutları ile hızlı ve güvenli çalışmaktadır.
 
+## Nasıl json tanımlarım?
 ```js
-const VeriTabanı = require("Richard.db");
-const db = new VeriTabanı();
-
-// Veri Ayarlama
-db.ayarla("veri1", "1");
-
-// Veriyi Çekme
-db.cek("veri1"); // Çıktı: 1
-db.bul("veri1"); // Çıktı: 1
-
-// Veriyi silme
-db.sil("veri1");
-
-db.cek("veri1"); // Çıktı: undefined çünkü veriyi sildik
-db.kontrol("veri1"); // Çıktı: false çünkü veriyi sildik
-db.bul("veri1"); // Çıktı: undefined çünkü veriyi sildik
-
-db.ayarla("yaş", 20);
-db.ekle("yaş", 1); // Yaş adlı veri 21 oldu
-db.eksilt("yaş", 10); // Yaş adlı veri 11 oldu
-
-db.ayarla("liste", [ "elma" ]);
-db.degerekle("liste", "portakal"); // [ "elma", "portakal" ]
-
-// Tüm verileri silme 
-db.temizle();
+/// Önce Tanımlama yapalım
+const Veritabani = require("richard.db");
+const rdb = new Veritabani("./richard.json");
 ```
- 
-Yapımcı: TheLord(Yusuf Göçer)
 
+## Peki nasıl kullanabilirim?
+```js
+/// Veri değerini sabitlemek (set)
+
+rdb.ayarla("Verimiz", "Richard Watterson"); // Verimiz verisini "Richard Watterson" olarak sabiledik.
+
+// Veri değerini çekmek
+rdb.cek("Verimiz"); // Çıktı olarak "Richard Watterson" çıktısını alacaksınız.
+rdb.bul("Verimiz"); // Çıktı olarak "Richard Watterson" çıktısını alacaksınız.
+
+// Veri silme
+rdb.sil("Verimiz"); // Verimiz verisini sildik.
+
+// Veri kontrolü
+rdb.kontrol("Verimiz"); // Eğer ki veri bulunuyor ise "true" çıktısı alırsınız, eğer ki veri bulunmuyorsa "false" çıktısını alırsınız. 
+
+// Veri ekleme - Veri azaltma
+rdb.ekle("Sayı", 5); // Sayı verimize 5 eklendi
+
+rdb.eksilt("Sayı", 4); // Sayı verimizden 4 eksiltildi
+
+// Verimize değer ekleme
+rdb.degerekle("Kimlik", { Isim: "Richard", Soyisim: "Watterson"}); // Kimlik verisine isim ve soyisim değerlerini ekledik.
+
+// Jsondaki verileri silme 
+rdb.temizle(); // rdb ile tanımlı olan Json dosyasını tamamen temizledik.
+```
